@@ -34,7 +34,7 @@ const PortfolioTable = () => {
 	const [itemsPerPage] = useState(10);
 	const [visiblePages, setVisiblePages] = useState([]);
 	const [portfolios, setPortfolio] = useState([]);
-
+	const [btnClicked, setBtnClicked] = useState(false);
 	useEffect(() => {
 		updateVisiblePages();
 	}, [currentPage, portfolios]);
@@ -206,8 +206,9 @@ const PortfolioTable = () => {
 									<Link
 										href={`/admin/portfolio/edit-portfolio/${item._id}`}
 										className='p-[10px] rounded-full bg-[#C1C1C1]  text-white  flex items-center gap-x-[10px]  w-max mr-[20px]'
+										onClick={() => setBtnClicked(true)}
 									>
-										<span>View</span>
+										{btnClicked ? 'Loading...' : 'View'}
 
 										<img
 											src={`/images/icons/arrowrightwhite.png`}

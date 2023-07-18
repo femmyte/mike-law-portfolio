@@ -12,9 +12,16 @@ import { useFetch } from '@/utils/services/hooks/useFetch';
 // export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
+async function getProducts(id) {
+	const products = await fetch(
+		`${process.env.NEXT_PUBLIC_SERVER_URL}/v1/store/`
+	).then((res) => res.json());
+	return products;
+}
+
 const Store = () => {
 	const [products, setProducts] = useState([]);
-
+	console.log(getProducts());
 	const { data, isInitialLoading, isSuccess, isError } = useFetch(
 		'/store/',
 		'get-products-user'

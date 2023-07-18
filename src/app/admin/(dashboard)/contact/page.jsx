@@ -24,7 +24,7 @@ const Contact = () => {
 	return (
 		<div className='px-[20px] w-full'>
 			<InputLine
-				placeholder='Edit Your Profile to Meet Up New Achievements'
+				placeholder='View new messages from your customer'
 				btnText='Save'
 			/>
 			<div className='flex items-center justify-center gap-x-[20px] mt-[44px] mb-[70px] md:w-[50%] mx-auto'>

@@ -5,7 +5,21 @@ import { messages } from '../../../../../../appData/message';
 import FullError from '@/components/errors/FullError';
 import FullLoader from '@/components/loaders/FullLoaders';
 import { useFetch } from '@/utils/services/hooks/useFetch';
+async function getMessage(id) {
+	const message = await fetch(
+		`${process.env.NEXT_PUBLIC_SERVER_URL}/v1/contact/${id}`
+	).then((res) => res.json());
+	return message;
+}
+export async function generateStaticParams() {
+	const message = await fetch(
+		`${process.env.NEXT_PUBLIC_SERVER_URL}/v1/contact/`
+	).then((res) => res.json());
 
+	return message.map((message) => ({
+		id: message._id,
+	}));
+}
 const dateConversion = (dateStr) => {
 	// const dateStr = '2023-07-14T19:40:47.204Z';
 	const date = new Date(dateStr);
@@ -21,34 +35,17 @@ const dateConversion = (dateStr) => {
 	return formattedTime;
 };
 export const revalidate = 0;
-// async function getMessage(id) {
-// 	const res = await fetch(`https://api.example.com/artist/${id}`);
-// 	return res.json();
-// }
-const Message = ({ params: { id } }) => {
-	// const messages = getArtist(id);
 
-	const url = `/contact/${id}`;
-	const [messages, setMessages] = useState([]);
-	const { data, isInitialLoading, isSuccess, isError } = useFetch(
-		url,
-		`get-${url}`
-	);
-	useEffect(() => {
-		if (isSuccess) {
-			setMessages(data);
-		}
-	}, [isSuccess, data]);
-	console.log(data);
-	if (isInitialLoading) {
-		return <FullLoader />;
+const Message = async ({ params: { id } }) => {
+	const messages = await getMessage(id);
+
+	if (!messages._id) {
+		return (
+			<div className='flex h-screen w-full bg-black text-white items-center justify-center'>
+				<p className='font-[700] text-[20px] text-white'>Loading...</p>
+			</div>
+		);
 	}
-	if (isError) {
-		return <FullError />;
-	}
-	// let [post] = messages
-	// 	.map((post) => post)
-	// 	.filter((post) => post.slug === slug);
 	const removePTags = (text) => {
 		const regex = /<p[^>]*>(.*?)<\/p>/g;
 		return text?.replace(regex, '$1');

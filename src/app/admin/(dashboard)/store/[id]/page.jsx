@@ -1,30 +1,31 @@
-'use client';
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import FullLoader from '@/components/loaders/FullLoaders';
-import FullError from '@/components/errors/FullError';
-import { useFetch } from '@/utils/services/hooks/useFetch';
-export const revalidate = 0;
+import React from 'react';
+// export const revalidate = 0;
+async function getProduct(id) {
+	const product = await fetch(
+		`${process.env.NEXT_PUBLIC_SERVER_URL}/v1/store/${id}`
+	).then((res) => res.json());
+	return product;
+}
+export async function generateStaticParams() {
+	const product = await fetch(
+		`${process.env.NEXT_PUBLIC_SERVER_URL}/v1/store/`
+	).then((res) => res.json());
 
-const SingleStore = ({ params: { id } }) => {
-	const [product, setProduct] = useState([]);
+	return product.map((product) => ({
+		id: product._id,
+	}));
+}
+const SingleStore = async ({ params: { id } }) => {
+	const product = await getProduct(id);
 
-	const { data, isInitialLoading, isSuccess, isError } = useFetch(
-		`/store/${id}`,
-		'get-single-product-user'
-	);
-	useEffect(() => {
-		if (isSuccess) {
-			setProduct(data);
-		}
-	}, [isSuccess, data]);
-
-	if (isInitialLoading) {
-		return <FullLoader />;
+	if (!product._id) {
+		return (
+			<div className='flex h-screen w-full bg-black text-white items-center justify-center'>
+				<p className='font-[700] text-[20px] text-white'>Loading...</p>
+			</div>
+		);
 	}
-	if (isError) {
-		return <FullError />;
-	}
+
 	const removePTags = (text) => {
 		const regex = /<p[^>]*>(.*?)<\/p>/g;
 		return text?.replace(regex, '$1');

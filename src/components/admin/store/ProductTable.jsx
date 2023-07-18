@@ -44,6 +44,7 @@ const ProductTable = () => {
 	const [itemsPerPage] = useState(10);
 	const [visiblePages, setVisiblePages] = useState([]);
 	const [products, setProducts] = useState([]);
+	const [btnClicked, setBtnClicked] = useState(false);
 	// useEffect(() => {
 	// 	updateVisiblePages();
 	// }, [currentPage, data]);
@@ -217,8 +218,9 @@ const ProductTable = () => {
 									<Link
 										href={`/admin/store/${item._id}`}
 										className='p-[10px] rounded-lg bg-[#C1C1C1]  text-white  flex items-center gap-x-[10px]  w-max mr-[20px]'
+										onClick={() => setBtnClicked(true)}
 									>
-										<span>View</span>
+										{btnClicked ? 'Loading...' : 'View'}
 									</Link>
 								</td>
 							</tr>

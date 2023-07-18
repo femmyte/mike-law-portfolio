@@ -1,13 +1,24 @@
-'use client';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Header from '../../../../components/common/Header';
-import { links } from '../link';
 import Article from '../../../../components/pages/Article';
-import { useFetch } from '@/utils/services/hooks/useFetch';
-import FullLoader from '@/components/loaders/FullLoaders';
-import FullError from '@/components/errors/FullError';
-export const dynamic = 'force-dynamic';
-// export const revalidate = 0;
+
+async function getblog(id) {
+	const blog = await fetch(
+		`${process.env.NEXT_PUBLIC_SERVER_URL}/v1/blog/${id}`
+	).then((res) => res.json());
+	return blog;
+}
+
+export async function generateStaticParams() {
+	const blogs = await fetch(
+		`${process.env.NEXT_PUBLIC_SERVER_URL}/v1/blog/`
+	).then((res) => res.json());
+
+	return blogs.map((blog) => ({
+		id: blog._id,
+	}));
+}
+
 const dateCoversion = (dateStr) => {
 	// const dateStr = '2023-07-14T19:40:47.204Z';
 	const date = new Date(dateStr);
@@ -22,30 +33,11 @@ const dateCoversion = (dateStr) => {
 	}
 	return formattedTime;
 };
-const Blog = ({ params: { id } }) => {
-	const url = `/blog/${id}`;
-	const [blogs, setBlogs] = useState([]);
-	// const [readingSpeed, setReadingSpeed] = useState(10);
-	// const [readingMinutes, setReadingMinutes] = useState(0);
-	const { data, isInitialLoading, isSuccess, isError } = useFetch(
-		url,
-		`get-${url}`
-	);
+const Blog = async ({ params: { id } }) => {
+	let blogs = await getblog(id);
 	console.log(blogs);
 	let readingSpeed = 50;
 	let readingMinutes = 0;
-	useEffect(() => {
-		if (isSuccess) {
-			setBlogs(data);
-		}
-	}, [isSuccess, data]);
-	if (isInitialLoading) {
-		return <FullLoader />;
-	}
-	if (isError) {
-		return <FullError />;
-	}
-
 	const wordCount = blogs?.blogContent?.trim().split(/\s+/).length;
 	const minutes = Math.ceil(wordCount / readingSpeed);
 

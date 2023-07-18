@@ -2,7 +2,7 @@ import React from 'react';
 
 const InputLine = ({ placeholder, btnText }) => {
 	return (
-		<div className='flex flex-col md:flex-row rounded-[10px] py-[15px] md:py-[20px] md:rounded-full bg-white border border-black w-full md:justify-between items-center md:h-[64px]'>
+		<div className='flex flex-col md:flex-row rounded-[10px] py-[15px] px-[20px] md:py-[20px] md:rounded-full bg-white border border-black w-full md:justify-between items-center md:h-[64px]'>
 			{placeholder}
 			{/* <div className='w-full bg-transparent border-none focus:border-none focus:outline-none text-black rounded-l-full px-[20px] h-[64px]'>
 			</div> */}

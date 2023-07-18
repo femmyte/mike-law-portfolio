@@ -1,23 +1,32 @@
-'use client';
 import InputLine from '@/components/admin/common/InputLine';
-import React, { useState, useEffect } from 'react';
-import { items } from '../../../../../appData/productData';
-import FullLoader from '../../../../../components/loaders/FullLoaders';
-import FullError from '../../../../../components/errors/FullError';
-import { useFetch } from '../../../../../utils/services/hooks/useFetch';
+import React from 'react';
 import axios from 'axios';
-import Orders from '../page';
-export const revalidate = 0;
 
-async function fetchData(productId, setProduct) {
+async function fetchData(productId) {
 	try {
 		const response = await axios.get(
 			`${process.env.NEXT_PUBLIC_SERVER_URL}/v1/store/${productId}`
 		);
-		setProduct(response.data);
+		return response.data;
 	} catch (error) {
 		console.error('Error fetching data:', error);
 	}
+}
+
+async function getOrder(id) {
+	const order = await fetch(
+		`${process.env.NEXT_PUBLIC_SERVER_URL}/v1/order/${id}`
+	).then((res) => res.json());
+	return order;
+}
+export async function generateStaticParams() {
+	const order = await fetch(
+		`${process.env.NEXT_PUBLIC_SERVER_URL}/v1/order/`
+	).then((res) => res.json());
+
+	return order.map((order) => ({
+		id: order._id,
+	}));
 }
 
 const Item = ({ title, text }) => {
@@ -32,35 +41,42 @@ const Item = ({ title, text }) => {
 		</div>
 	);
 };
-const Page = ({ params: { id } }) => {
-	const [product, setProduct] = useState([]);
-	const [order, setOrder] = useState([]);
-
-	const { data, isInitialLoading, isSuccess, isError } = useFetch(
-		`/order/${id}`,
-		'get-single-order-user'
-	);
-
-	console.log(data);
-
+const Page = async ({ params: { id } }) => {
+	const order = await getOrder(id);
 	const productId = order?.productId;
 
-	useEffect(() => {
-		if (isSuccess) {
-			setOrder(data);
-			if (productId) {
-				fetchData(productId, setProduct);
-			}
-			// fetchData(productId, setProduct);/
-		}
-	}, [isSuccess, data, productId]);
+	let product;
+	if (productId) {
+		product = await fetchData(productId);
+	}
+	// const [product, setProduct] = useState([]);
+	// const [order, setOrder] = useState([]);
 
-	if (isInitialLoading) {
-		return <FullLoader />;
+	// const { data, isInitialLoading, isSuccess, isError } = useFetch(
+	// 	`/order/${id}`,
+	// 	'get-single-order-user'
+	// );
+
+	// useEffect(() => {
+	// 	if (isSuccess) {
+	// 		setOrder(data);
+	// 		if (productId) {
+	// 			fetchData(productId, setProduct);
+	// 		}
+	// 		// fetchData(productId, setProduct);/
+	// 	}
+	// }, [isSuccess, data, productId]);
+
+	if (!productId) {
+		return (
+			<div className='flex h-screen w-full bg-black text-white items-center justify-center'>
+				<p className='font-[700] text-[20px] text-white'>Loading...</p>
+			</div>
+		);
 	}
-	if (isError) {
-		return <FullError />;
-	}
+	// if (isError) {
+	// 	return <FullError />;
+	// }
 
 	return (
 		<div className='px-[20px] w-full'>

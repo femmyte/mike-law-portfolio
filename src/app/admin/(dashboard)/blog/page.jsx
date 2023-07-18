@@ -103,10 +103,7 @@ const Blog = () => {
 	// }
 	return (
 		<div className='px-[20px]'>
-			<InputLine
-				placeholder='Edit Your Profile to Meet Up New Achievements'
-				btnText='Save'
-			/>
+			<InputLine placeholder='Create a new blog post' btnText='Save' />
 			<form onSubmit={handleSubmit}>
 				<div className=' py-[24px] flex flex-col md:flex-row gap-y-[40px] gap-x-[50px]'>
 					<div className='md:w-[50%]'>
