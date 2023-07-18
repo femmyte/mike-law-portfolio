@@ -1,10 +1,5 @@
-'use client';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import InputLine from '../../../../../../components/admin/common/InputLine';
-import { messages } from '../../../../../../appData/message';
-import FullError from '@/components/errors/FullError';
-import FullLoader from '@/components/loaders/FullLoaders';
-import { useFetch } from '@/utils/services/hooks/useFetch';
 async function getMessage(id) {
 	const message = await fetch(
 		`${process.env.NEXT_PUBLIC_SERVER_URL}/v1/contact/${id}`
@@ -53,7 +48,7 @@ const Message = async ({ params: { id } }) => {
 	return (
 		<div className='px-[20px] w-full'>
 			<InputLine
-				placeholder='Edit Your Profile to Meet Up New Achievements'
+				placeholder='View new messages from your customer'
 				btnText='Save'
 			/>
 			<div className='mt-[30px] md:mt-[45px]'>

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 // import award from '../img/kcca7.JPG';
 // import { useStateContext } from '../context/AuthContext';
-import { url } from '../../../../url';
+import { url } from '../../../url';
 // import { withLogoutAuth } from '../../utils/auth/withLogoutAuth';
 import { redirect, useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
@@ -21,12 +21,15 @@ const Index = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const result = await signIn('credentials', {
-			username: email,
-			password: password,
-			redirect: true,
-			callbackUrl: '/admin/dashboard',
-		});
+		// const result = await signIn('credentials', {
+		// 	username: email,
+		// 	password: password,
+		// 	redirect: true,
+		// 	callbackUrl: '/admin/dashboard',
+		// });
+
+		router.replace('/admin/dashboard');
+
 		// router.push('/admin/overview');
 		// if (!email || !password) return;
 		// try {

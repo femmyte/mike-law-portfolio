@@ -80,10 +80,7 @@ const Page = async ({ params: { id } }) => {
 
 	return (
 		<div className='px-[20px] w-full'>
-			<InputLine
-				placeholder='Edit Your Profile to Meet Up New Achievements'
-				btnText='Save'
-			/>
+			<InputLine placeholder='View Order Details' btnText='Save' />
 			<div className='mt-[40px]'>
 				<Item title='Product Name' text={product?.name} />
 				<Item

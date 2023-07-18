@@ -4,7 +4,20 @@ import Link from 'next/link';
 import { useFetch } from '@/utils/services/hooks/useFetch';
 import FullError from '@/components/errors/FullError';
 import FullLoader from '@/components/loaders/FullLoaders';
+const dateCoversion = (dateStr) => {
+	// const dateStr = '2023-07-14T19:40:47.204Z';
+	const date = new Date(dateStr);
+	const currentDate = new Date();
 
+	let formattedTime = date.toLocaleTimeString([], {
+		hour: '2-digit',
+		minute: '2-digit',
+	});
+	if (date.toDateString() === currentDate.toDateString()) {
+		formattedTime = 'today ' + formattedTime;
+	}
+	return formattedTime;
+};
 const Card = ({ name, email, date, id }) => {
 	return (
 		<div className='flex flex-wrap gap-y-4 md:flex-row rounded-[10px] py-[9px] px-[10px] md:px-[24px] md:rounded-full bg-white border border-black shadow w-full justify-between items-center md:h-[64px] mb-[14px]'>
@@ -18,7 +31,7 @@ const Card = ({ name, email, date, id }) => {
 				{email}
 			</p>
 			<p className='hidden md:block font-[500] text-[10px] leading-[16px] md:w-[176px]'>
-				{date}
+				{dateCoversion(date)}
 			</p>
 			<Link
 				href={`/admin/contact/message/${id}`}

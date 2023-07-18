@@ -1,28 +1,30 @@
-'use client';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import InputLine from '../../../../../../components/admin/common/InputLine';
-import { useFetch } from '@/utils/services/hooks/useFetch';
-import FullLoader from '@/components/loaders/FullLoaders';
-import FullError from '@/components/errors/FullError';
 
-const Feedback = ({ params: { id } }) => {
-	const url = `/feedback/${id}`;
-	const [feedbacks, setFeedbacks] = useState([]);
-	const { data, isInitialLoading, isSuccess, isError } = useFetch(
-		url,
-		`get-${url}`
-	);
-	useEffect(() => {
-		if (isSuccess) {
-			setFeedbacks(data);
-		}
-	}, [isSuccess, data]);
-	console.log(data);
-	if (isInitialLoading) {
-		return <FullLoader />;
-	}
-	if (isError) {
-		return <FullError />;
+async function getMessage(id) {
+	const message = await fetch(
+		`${process.env.NEXT_PUBLIC_SERVER_URL}/v1/feedback/${id}`
+	).then((res) => res.json());
+	return message;
+}
+export async function generateStaticParams() {
+	const message = await fetch(
+		`${process.env.NEXT_PUBLIC_SERVER_URL}/v1/feedback/`
+	).then((res) => res.json());
+
+	return message.map((message) => ({
+		id: message._id,
+	}));
+}
+const Feedback = async ({ params: { id } }) => {
+	const feedbacks = await getMessage(id);
+
+	if (!feedbacks._id) {
+		return (
+			<div className='flex h-screen w-full bg-black text-white items-center justify-center'>
+				<p className='font-[700] text-[20px] text-white'>Loading...</p>
+			</div>
+		);
 	}
 	const removePTags = (text) => {
 		const regex = /<p[^>]*>(.*?)<\/p>/g;
