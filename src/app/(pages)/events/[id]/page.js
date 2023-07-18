@@ -8,7 +8,6 @@ import FullError from '../../../../components/errors/FullError';
 import FullLoader from '../../../../components/loaders/FullLoaders';
 import { useFetch } from '../../../../utils/services/hooks/useFetch';
 const EventPage = ({ params: { id } }) => {
-	const { slug } = params;
 	const [open, setOpen] = useState(false);
 
 	const url = `/event/${id}`;
