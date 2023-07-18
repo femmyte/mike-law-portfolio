@@ -9,8 +9,8 @@ import FullLoader from '@/components/loaders/FullLoaders';
 import FullError from '@/components/errors/FullError';
 import { useFetch } from '@/utils/services/hooks/useFetch';
 import { useSubmit } from '@/utils/services/hooks/useSubmit';
-export const revalidate = 0;
-
+// export const revalidate = 0;
+export const dynamic = 'force-dynamic';
 const SingleStore = ({ params: { id } }) => {
 	const [product, setProduct] = useState([]);
 	const [name, setName] = useState('');

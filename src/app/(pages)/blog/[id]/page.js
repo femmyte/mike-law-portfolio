@@ -6,8 +6,8 @@ import Article from '../../../../components/pages/Article';
 import { useFetch } from '@/utils/services/hooks/useFetch';
 import FullLoader from '@/components/loaders/FullLoaders';
 import FullError from '@/components/errors/FullError';
-// export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const dynamic = 'force-dynamic';
+// export const revalidate = 0;
 const dateCoversion = (dateStr) => {
 	// const dateStr = '2023-07-14T19:40:47.204Z';
 	const date = new Date(dateStr);

@@ -7,6 +7,7 @@ import { events } from '../eventList';
 import FullError from '../../../../components/errors/FullError';
 import FullLoader from '../../../../components/loaders/FullLoaders';
 import { useFetch } from '../../../../utils/services/hooks/useFetch';
+export const dynamic = 'force-dynamic';
 const EventPage = ({ params: { id } }) => {
 	const [open, setOpen] = useState(false);
 
