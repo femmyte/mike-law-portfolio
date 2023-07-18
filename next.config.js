@@ -1,4 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+	output: 'export',
+	trailingSlash: true,
+	// images: {
+	// 	loader: 'custom',
+	// },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

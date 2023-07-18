@@ -1,0 +1,26 @@
+export const items = [
+	{
+		productName: 'How to become a millionaire',
+		price: 20000,
+		customer: 'Durock Sraah',
+		address: '',
+		country: 'Nigeria',
+		info: '',
+		email: 'mailto:duracksrahh@gmail.com',
+		date: 'Yesterday, 1:09PM',
+		status: 'successfull',
+		slug: 'durock',
+	},
+	{
+		productName: 'You can be better than this',
+		price: 30000,
+		customer: 'Femmyte Sraah',
+		address: '',
+		country: 'Nigeria',
+		info: '',
+		email: 'mailto:duracksrahh@gmail.com',
+		date: 'Yesterday, 1:09PM',
+		status: 'successfull',
+		slug: 'femmyte',
+	},
+];
