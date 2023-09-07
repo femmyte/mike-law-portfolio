@@ -4,8 +4,7 @@ import { getToken } from './common';
 
 const PrivateRoute = () => {
 	const token = getToken();
-	// console.log(token);
-	return token ? <Outlet /> : <Navigate to='/' />;
+	return token ? <Outlet /> : <Navigate to='/admin' />;
 };
 
 export default PrivateRoute;

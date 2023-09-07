@@ -44,7 +44,6 @@ const EventTable = () => {
 	useEffect(() => {
 		if (isSuccess) {
 			setEvents(data);
-			console.log(data);
 		}
 	}, [isSuccess, data]);
 
@@ -148,7 +147,7 @@ const EventTable = () => {
 						className='bg-black h-full hover:bg-blue-700 w-max text-white font-semibold py-2 px-2 md:px-4 text-[12px]  rounded-l mr-[-2px] md:flex items-center gap-x-[13px]'
 					>
 						<AiOutlineDownload className='text-[12px] hidden md:block' />
-						<span>Export Table</span>
+						<span className='text-white'>Export Table</span>
 					</button>
 					<SearchComponent
 						onFilter={handleSearch}
@@ -164,13 +163,13 @@ const EventTable = () => {
 								Event Images
 							</th> */}
 							<th className='text-[#667085] p-2 text-left'>
-								Names
-							</th>
-							<th className='text-[#667085] p-2 text-left'>
-								Price
+								Event Names
 							</th>
 							<th className='text-[#667085] p-2 text-left'>
 								Type
+							</th>
+							<th className='text-[#667085] p-2 text-left'>
+								Price
 							</th>
 							<th className='text-[#667085] p-2'>Action</th>
 							{/* <th className='text-[#667085] p-2'>Course</th>
@@ -197,18 +196,18 @@ const EventTable = () => {
 										className=' rounded-full p-2 h-[50px] w-[50px] '
 									/>
 								</td> */}
-								<td className=' p-2 text-[#667085]'>
+								<td className=' p-2 text-[#667085] text-left'>
 									{item?.name}
 								</td>
-								<td className=' p-2 text-[#667085]'>
+								<td className=' p-2 text-[#667085] text-left'>
 									{item?.type}
 								</td>
-								<td className=' p-2 text-[#667085]'>
+								<td className=' p-2 text-[#667085] text-left'>
 									{item?.price}
 								</td>
-								<td className=' p-2 text-[#667085]'>
+								<td className=' p-2 text-[#667085] text-left'>
 									<Link
-										to={`/events/edit-event/${item._id}`}
+										to={`/admin/events/edit-event/${item._id}`}
 										className='p-[10px] rounded-full bg-black  text-white  flex items-center gap-x-[10px]  w-max mr-[20px]'
 										// onClick={() => setBtnClicked(true)}
 									>

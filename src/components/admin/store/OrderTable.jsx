@@ -190,7 +190,7 @@ const OrderTable = () => {
 								</td>
 								<td className=' p-2 text-[#667085]'>
 									<Link
-										to={`/orders/product/${item._id}`}
+										to={`/admin/orders/product/${item._id}`}
 										className='p-[10px] rounded-lg bg-[#C1C1C1]  text-white  flex items-center gap-x-[10px]  w-max mr-[20px]'
 									>
 										<span className=''>View</span>

@@ -1,124 +1,168 @@
-import logo from './logo.svg';
 import './App.css';
 import PublicRoute from './utils/PublicRoute';
 import PrivateRoute from './utils/PrivateRoute';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './pages/login';
-import Dashboard from './pages/dashboard';
-import About from './pages/about';
-import Blog from './pages/blog';
-import Contact from './pages/contact';
-import Events from './pages/events';
-import Orders from './pages/orders';
-import Portfolio from './pages/portfolio';
-import Store from './pages/store';
-
+import Login from './admin/login';
+import Dashboard from './admin/dashboard';
+import About from './admin/about';
+import Blog from './admin/blog';
+import Contact from './admin/contact';
+import Events from './admin/events';
+import Orders from './admin/orders';
+import Portfolio from './admin/portfolio';
+import Store from './admin/store';
 import DashboardLayout from './components/admin/common/DashboardLayout';
-import Feedback from './pages/contact/feedback';
-import Message from './pages/contact/message';
-import EditPortfolio from './pages/portfolio/edit-portfolio/[id]';
-import SingleStore from './pages/store/product';
-import OrderProduct from './pages/orders/product';
+import Feedback from './admin/contact/feedback';
+import Message from './admin/contact/message';
+import EditPortfolio from './admin/portfolio/edit-portfolio/[id]';
+import SingleStore from './admin/store/product';
+import OrderProduct from './admin/orders/product';
+import * as Client from './client';
+import EditEvent from './admin/events/edit-event';
 function App() {
 	return (
 		<>
 			<Router>
 				<Routes>
-					<Route exact path='/' element={<PublicRoute />}>
-						<Route exact path='/' element={<Login />}></Route>
+					<Route exact path='/' element={<Client.Home />}></Route>
+					<Route path='/about' element={<Client.About />}></Route>
+					<Route exact path='/blog' element={<Client.Blog />}></Route>
+					<Route
+						path='/blog/:id'
+						element={<Client.SingleBlog />}
+					></Route>
+					<Route
+						exact
+						path='/contact'
+						element={<Client.Contact />}
+					></Route>
+					<Route exact path='/cart' element={<Client.Cart />}></Route>
+					<Route
+						exact
+						path='/events'
+						element={<Client.Events />}
+					></Route>
+					<Route
+						path='/event/:id'
+						element={<Client.EventPage />}
+					></Route>
+					<Route
+						exact
+						path='/portfolio'
+						element={<Client.Portfolio />}
+					></Route>
+					<Route
+						exact
+						path='/store'
+						element={<Client.Store />}
+					></Route>
+					<Route
+						path='/store/product/:id'
+						element={<Client.SingleStore />}
+					></Route>
+				</Routes>
+				<Routes>
+					<Route exact path='/admin' element={<PublicRoute />}>
+						<Route exact path='/admin' element={<Login />}></Route>
+					</Route>
+					{/* </Routes>
+				<DashboardLayout>
+					<Routes> */}
+					<Route path='/admin/dashboard' element={<PrivateRoute />}>
+						<Route
+							path='/admin/dashboard'
+							element={<Dashboard />}
+						></Route>
+					</Route>
+					<Route path='/admin/about' element={<PrivateRoute />}>
+						<Route path='/admin/about' element={<About />}></Route>
+					</Route>
+					<Route path='/admin/blog' element={<PrivateRoute />}>
+						<Route path='/admin/blog' element={<Blog />}></Route>
+					</Route>
+					<Route path='/admin/contact' element={<PrivateRoute />}>
+						<Route
+							path='/admin/contact'
+							element={<Contact />}
+						></Route>
+					</Route>
+					<Route
+						path='/admin/contact/message/:id'
+						element={<PrivateRoute />}
+					>
+						<Route
+							path='/admin/contact/message/:id'
+							element={<Message />}
+						></Route>
+					</Route>
+					<Route
+						path='/admin/contact/feedback/:id'
+						element={<PrivateRoute />}
+					>
+						<Route
+							path='/admin/contact/feedback/:id'
+							element={<Feedback />}
+						></Route>
+					</Route>
+					<Route path='/admin/events' element={<PrivateRoute />}>
+						<Route
+							path='/admin/events'
+							element={<Events />}
+						></Route>
+					</Route>
+					<Route
+						path='/admin/events/edit-event/:id'
+						element={<PrivateRoute />}
+					>
+						<Route
+							path='/admin/events/edit-event/:id'
+							element={<EditEvent />}
+						></Route>
+					</Route>
+					<Route path='/admin/orders' element={<PrivateRoute />}>
+						<Route
+							path='/admin/orders'
+							element={<Orders />}
+						></Route>
+					</Route>
+					<Route
+						path='/admin/orders/product/:id'
+						element={<PrivateRoute />}
+					>
+						<Route
+							path='/admin/orders/product/:id'
+							element={<OrderProduct />}
+						></Route>
+					</Route>
+					<Route path='/admin/portfolio' element={<PrivateRoute />}>
+						<Route
+							path='/admin/portfolio'
+							element={<Portfolio />}
+						></Route>
+					</Route>
+					<Route
+						path='/admin/portfolio/edit-portfolio/:id'
+						element={<PrivateRoute />}
+					>
+						<Route
+							path='/admin/portfolio/edit-portfolio/:id'
+							element={<EditPortfolio />}
+						></Route>
+					</Route>
+					<Route path='/admin/store' element={<PrivateRoute />}>
+						<Route path='/admin/store' element={<Store />}></Route>
+					</Route>
+					<Route
+						path='/admin/store/product/:id'
+						element={<PrivateRoute />}
+					>
+						<Route
+							path='/admin/store/product/:id'
+							element={<SingleStore />}
+						></Route>
 					</Route>
 				</Routes>
-				<DashboardLayout>
-					<Routes>
-						<Route path='/dashboard' element={<PrivateRoute />}>
-							<Route
-								path='/dashboard'
-								element={<Dashboard />}
-							></Route>
-						</Route>
-						<Route path='/about' element={<PrivateRoute />}>
-							<Route path='/about' element={<About />}></Route>
-						</Route>
-						<Route path='/blog' element={<PrivateRoute />}>
-							<Route path='/blog' element={<Blog />}></Route>
-						</Route>
-						<Route path='/contact' element={<PrivateRoute />}>
-							<Route
-								path='/contact'
-								element={<Contact />}
-							></Route>
-						</Route>
-						<Route
-							path='/contact/message/:id'
-							element={<PrivateRoute />}
-						>
-							<Route
-								path='/contact/message/:id'
-								element={<Message />}
-							></Route>
-						</Route>
-						<Route
-							path='/contact/feedback/:id'
-							element={<PrivateRoute />}
-						>
-							<Route
-								path='/contact/feedback/:id'
-								element={<Feedback />}
-							></Route>
-						</Route>
-						<Route path='/events' element={<PrivateRoute />}>
-							<Route path='/events' element={<Events />}></Route>
-						</Route>
-						<Route
-							path='/events/edit-event/:id'
-							element={<PrivateRoute />}
-						>
-							<Route
-								path='/events/edit-event/:id'
-								element={<Message />}
-							></Route>
-						</Route>
-						<Route path='/orders' element={<PrivateRoute />}>
-							<Route path='/orders' element={<Orders />}></Route>
-						</Route>
-						<Route
-							path='/orders/product/:id'
-							element={<PrivateRoute />}
-						>
-							<Route
-								path='/orders/product/:id'
-								element={<OrderProduct />}
-							></Route>
-						</Route>
-						<Route path='/portfolio' element={<PrivateRoute />}>
-							<Route
-								path='/portfolio'
-								element={<Portfolio />}
-							></Route>
-						</Route>
-						<Route
-							path='/portfolio/edit-portfolio/:id'
-							element={<PrivateRoute />}
-						>
-							<Route
-								path='/portfolio/edit-portfolio/:id'
-								element={<EditPortfolio />}
-							></Route>
-						</Route>
-						<Route path='/store' element={<PrivateRoute />}>
-							<Route path='/store' element={<Store />}></Route>
-						</Route>
-						<Route
-							path='/store/product/:id'
-							element={<PrivateRoute />}
-						>
-							<Route
-								path='/store/product/:id'
-								element={<SingleStore />}
-							></Route>
-						</Route>
-					</Routes>
-				</DashboardLayout>
+				{/* </DashboardLayout> */}
 			</Router>
 		</>
 	);

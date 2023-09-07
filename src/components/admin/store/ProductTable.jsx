@@ -207,19 +207,25 @@ const ProductTable = () => {
 									{item.productName}
 								</span> */}
 								{/* </td> */}
-								<td className=' p-2 text-[#667085]'>
+								<td className=' p-2 text-[#667085] text-left'>
 									{item.name}
 								</td>
-								<td className=' p-2 text-[#667085]'>
+								<td className=' p-2 text-[#667085] text-left'>
 									{item.price}
 								</td>
-								<td className=' p-2 text-[#667085]'>
+								<td className=' p-2 text-[#667085] text-left'>
 									<Link
-										to={`/store/product/${item._id}`}
-										className='p-[10px] rounded-lg bg-[#C1C1C1]  text-white  flex items-center gap-x-[10px]  w-max mr-[20px]'
+										to={`/admin/store/product/${item._id}`}
+										className='p-[10px] rounded-full bg-black  text-white  flex items-center gap-x-[10px]  w-max mr-[20px]'
 										onClick={() => setBtnClicked(true)}
 									>
-										{btnClicked ? 'Loading...' : 'View'}
+										{/* {btnClicked ? 'Loading...' : 'View'} */}
+										<span className='text-white'>Edit</span>
+										<img
+											src={require(`../../../images/icons/arrowrightwhite.png`)}
+											className=' '
+											alt='arrow logo'
+										/>
 									</Link>
 								</td>
 							</tr>

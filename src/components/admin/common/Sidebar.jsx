@@ -43,7 +43,7 @@ const Sidebar = () => {
 						</Link> */}
 							<div className='mt-[30px] md:mt-[45px] mb-[20px] md:mb-[30px] pl-4'>
 								<Link
-									to='/events'
+									to='/admin/events'
 									type='submit'
 									className='md:my-0 py-[10px] text-[16px] px-[20px] rounded-full border text-black border-black flex items-center gap-x-[10px]  w-max'
 								>
@@ -73,7 +73,7 @@ const Sidebar = () => {
 									{item.links.map((link) => {
 										return (
 											<NavLink
-												to={`/${link.name}`}
+												to={`/admin/${link.name}`}
 												key={link.name}
 												onClick={handleCloseSidebar}
 												className={({

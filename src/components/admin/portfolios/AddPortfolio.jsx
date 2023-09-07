@@ -114,7 +114,7 @@ const AddPortfolio = () => {
 						{/* <span>Add Product</span> */}
 						{btnClicked ? 'Loading...' : 'Add Portfolio'}
 						<img
-							src={`/images/icons/arrowrightwhite.png`}
+							src={require(`../../../images/icons/arrowrightwhite.png`)}
 							className=' '
 							alt='arrow logo'
 						/>

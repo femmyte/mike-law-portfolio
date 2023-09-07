@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useSubmit } from '@/utils/services/hooks/useSubmit';
+import React, { useState } from 'react';
+import { useSubmit } from '../../utils/services/hooks/useSubmit';
+import { toast } from 'react-toastify';
 const OrderForm = ({ product }) => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
@@ -30,7 +31,7 @@ const OrderForm = ({ product }) => {
 		const result = await submitItem({ url, itemData });
 
 		if (result.isError === false) {
-			toast('Area Details created successfully');
+			toast('Order has been made successfully');
 			setName('');
 			setEmail('');
 			setCountry('');
@@ -42,9 +43,9 @@ const OrderForm = ({ product }) => {
 		}
 		setBtnClicked(false);
 
-		console.log(result.data);
-		console.log(result.message);
-		console.log(result.isError);
+		// console.log(result.data);
+		// console.log(result.message);
+		// console.log(result.isError);
 	}
 	return (
 		<form onSubmit={handleSubmit} className='w-full mt-[50px] mb-[20px]'>
@@ -159,7 +160,10 @@ const OrderForm = ({ product }) => {
 					className='flex gap-x-[7px] items-center border border-black px-[20px] py-[10px] rounded-full w-max'
 				>
 					{btnClicked ? 'Loading...' : 'Make Payment'}
-					<img src='/images/icons/arrowright.png' alt='arrow' />
+					<img
+						src={require('../../images/icons/arrowright.png')}
+						alt='arrow'
+					/>
 				</button>
 			</div>
 			<p className='clear-right'></p>

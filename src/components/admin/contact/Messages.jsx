@@ -34,7 +34,7 @@ const Card = ({ name, email, date, id }) => {
 				{dateCoversion(date)}
 			</p>
 			<Link
-				to={`/contact/message/${id}`}
+				to={`/admin/contact/message/${id}`}
 				type='submit'
 				className='p-[10px] rounded-full bg-black text-white  flex items-center gap-x-[10px] w-max '
 			>

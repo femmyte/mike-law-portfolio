@@ -59,7 +59,7 @@ const PortfolioTable = () => {
 	// Logic to export the table data
 	const handleExport = () => {
 		const filteredData = portfolios?.filter((item) =>
-			item.name.toLowerCase().includes(searchTerm.toLowerCase())
+			item.title.toLowerCase().includes(searchTerm.toLowerCase())
 		);
 
 		// Convert data to worksheet
@@ -149,7 +149,7 @@ const PortfolioTable = () => {
 						className='bg-black h-full hover:bg-blue-700 w-max text-white font-semibold py-2 px-2 md:px-4 text-[12px]  rounded-l mr-[-2px] md:flex items-center gap-x-[13px]'
 					>
 						<AiOutlineDownload className='text-[12px] hidden md:block' />
-						<span>Export Table</span>
+						<span className='text-white'>Export Table</span>
 					</button>
 					<SearchComponent
 						onFilter={handleSearch}
@@ -195,20 +195,20 @@ const PortfolioTable = () => {
 										className=' rounded-full p-2 h-[50px] w-[50px] '
 									/>
 								</td>
-								<td className=' p-2 text-[#667085]'>
+								<td className=' p-2 text-[#667085] text-left'>
 									{item?.title}
 								</td>
-								<td className=' p-2 text-[#667085]'>
+								<td className=' p-2 text-[#667085] text-left'>
 									{item?.url}
 								</td>
-								<td className=' p-2 text-[#667085]'>
+								<td className=' p-2 text-[#667085] text-left'>
 									<Link
-										to={`/portfolio/edit-portfolio/${item._id}`}
+										to={`/admin/portfolio/edit-portfolio/${item._id}`}
 										className='p-[10px] rounded-full bg-black  text-white  flex items-center gap-x-[10px]  w-max mr-[20px]'
 										// onClick={() => setBtnClicked(true)}
 									>
 										{/* {btnClicked ? 'Loading...' : 'View'} */}
-										<span className='text-white'>View</span>
+										<span className='text-white'>Edit</span>
 										<img
 											src={require(`../../../images/icons/arrowrightwhite.png`)}
 											className=' '

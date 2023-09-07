@@ -26,3 +26,13 @@ span {
 	background-color: #e1e1e1 !important;
 	display: block;
 }
+
+.home-bg {
+	background-image: url('./images/client-bg.png');
+}
+.home-bg-small {
+	background-image: url('./images/mobile/client-bg.png');
+}
+.ozekhome-bg {
+	background-image: url('./images/ozekhome.jpg');
+}

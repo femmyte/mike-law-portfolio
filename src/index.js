@@ -10,6 +10,7 @@ import {
 	QueryClientProvider,
 	useQuery,
 } from '@tanstack/react-query';
+import ContextProvider from './utils/DataContext';
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,7 +18,9 @@ root.render(
 		<QueryClientProvider client={queryClient}>
 			<ToastProvider>
 				<AuthContextProvider>
-					<App />
+					<ContextProvider>
+						<App />
+					</ContextProvider>
 				</AuthContextProvider>
 			</ToastProvider>
 		</QueryClientProvider>

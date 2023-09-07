@@ -33,10 +33,10 @@ const Card = ({ name, email, date, id }) => {
 				{dateCoversion(date)}
 			</p>
 			<Link
-				to={`/contact/feedback/${id}`}
+				to={`/admin/contact/feedback/${id}`}
 				className='p-[10px] rounded-full bg-black text-white  flex items-center gap-x-[10px] w-max '
 			>
-				<span>View</span>
+				<span className='text-white'>View</span>
 				<img
 					src={require(`../../../images/icons/arrowrightwhite.png`)}
 					className=' '
