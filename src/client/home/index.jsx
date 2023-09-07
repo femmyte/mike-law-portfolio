@@ -121,7 +121,7 @@ const page = () => {
 									to='/portfolio'
 									className='py-[10px] px-[20px] rounded-full border border-white flex items-center gap-x-[7px]  h-[50px] text-white w-[230px]'
 								>
-									<span className='text-[16px]'>
+									<span className='text-[16px] text-white'>
 										{' '}
 										Explore His Portfolio
 									</span>
