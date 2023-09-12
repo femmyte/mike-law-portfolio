@@ -16,7 +16,7 @@ const dateCoversion = (dateStr) => {
 };
 const BlogCard = ({ title, date, tag, info, id, image }) => {
 	return (
-		<div className='relative'>
+		<Link to={`/blog/${id}`} className='relative rounded-lg'>
 			<img
 				src={`${image ? image : '/images/frame.png'}`}
 				alt='video background'
@@ -45,7 +45,7 @@ const BlogCard = ({ title, date, tag, info, id, image }) => {
 					{info}
 				</p>
 			</div>
-		</div>
+		</Link>
 	);
 };
 

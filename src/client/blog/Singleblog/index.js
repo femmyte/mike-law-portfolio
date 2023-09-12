@@ -8,6 +8,8 @@ import FullError from '../../../components/errors/FullError';
 import Nav from '../../../components/common/Nav';
 import Footer from '../../../components/common/Footer';
 
+import renderHtml from '../../../utils/renderHtml';
+
 const dateCoversion = (dateStr) => {
 	// const dateStr = '2023-07-14T19:40:47.204Z';
 	const date = new Date(dateStr);
@@ -43,7 +45,7 @@ const Blog = () => {
 		return <FullError />;
 	}
 
-	let readingSpeed = 50;
+	let readingSpeed = 150;
 	let readingMinutes = 0;
 	const wordCount = blogs?.blogContent?.trim().split(/\s+/).length;
 	const minutes = Math.ceil(wordCount / readingSpeed);
@@ -74,13 +76,16 @@ const Blog = () => {
 						className='relative'
 					/>
 
-					<button className='py-[10px] text-[16px] px-[20px] rounded-full border border-black w-max absolute top-[20px] right-[20px]'>
-						{/* {blogs?.tags[0]} */}
-					</button>
+					{/* <button className='py-[10px] text-[16px] px-[20px] rounded-full border border-black w-max absolute top-[20px] right-[20px]  '>
+						<span className='text-white shadow-md'>
+							{blogs?.tags[0]}
+						</span>
+					</button> */}
 				</div>
 				<div>
-					<p className='font-[400] text-[12px] leading-[32px] text-gray-600'>
-						{removePTags(blogs?.blogContent)}
+					<p className='font-[400] text-[16px] leading-[32px] text-gray-600 text-justify'>
+						{/* {removePTags(blogs?.blogContent)} */}
+						{renderHtml(blogs?.blogContent)}
 					</p>
 				</div>
 				<div className='w-full clear-both'>

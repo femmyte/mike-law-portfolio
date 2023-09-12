@@ -31,7 +31,7 @@ const ProductCard = ({ title, date, price, image, info, id }) => {
 				{tag}
 			</button> */}
 				<img
-					src='/images/logo2.png'
+					src={require('../../images/logo2.png')}
 					alt='logo'
 					className='absolute top-0 right-[40px]'
 				/>

@@ -4,7 +4,7 @@ import Animation from '../../components/common/Animation';
 import useFetch from '../../utils/services/hooks/useFetch';
 import FullLoader from '../loaders/FullLoaders';
 import FullError from '../errors/FullError';
-
+import renderHtml from '../../utils/renderHtml';
 function truncateText(text, maxLength) {
 	if (text.length <= maxLength) {
 		return text;
@@ -13,13 +13,16 @@ function truncateText(text, maxLength) {
 	}
 }
 
-// const truncatedText = truncateText(originalText, maxLength);
+const truncatedText = (text) => {
+	return truncateText(text, 80);
+};
 
 const removePTags = (text) => {
 	const regex = /<p[^>]*>(.*?)<\/p>/g;
 	let newText = text?.replace(regex, '$1');
 	return truncateText(newText, 80);
 };
+
 const Card = ({ img, title, text, id }) => {
 	return (
 		<div
@@ -37,7 +40,8 @@ const Card = ({ img, title, text, id }) => {
 						{title}
 					</p>
 					<p className='font-[400] text-[12px] md:text-[20px] leading-[16px] md:leading-[32px] mt-[8px]'>
-						{removePTags(text)}
+						{/* {removePTags(text)} */}
+						{renderHtml(truncatedText(text))}
 					</p>
 				</div>
 				<Link to={`/blog/${id}`} className=''>
@@ -56,34 +60,8 @@ const Card = ({ img, title, text, id }) => {
 };
 const Article = () => {
 	const [articles, setArticles] = useState([]);
-	// const { data, isInitialLoading, isSuccess, isError, refetch } = useFetch(
-	// 	'/blog/',
-	// 	'get-blogs'
-	// );
 
-	// useEffect(() => {
-	// 	if (isSuccess) {
-	// 		setArticles(data.articles);
-	// 	}
-
-	// 	refetch();
-	// }, [articles, isSuccess, data, refetch]);
-
-	// if (isInitialLoading) {
-	// 	return <FullLoader />;
-	// }
-	// if (isError) {
-	// 	return <FullError />;
-	// }
 	useEffect(() => {
-		// const myInit = {
-		// 	method: 'GET',
-		// 	headers: {
-		// 		Accept: 'image/jpeg',
-		// 	},
-		// 	mode: 'cors',
-		// 	cache: 'default',
-		// };
 		const fetchData = async () => {
 			const res = await fetch(
 				`${process.env.REACT_APP_API_URL}/v1/blog/`
@@ -93,6 +71,8 @@ const Article = () => {
 		};
 		fetchData();
 	}, []);
+
+	const lastFiveArticles = articles?.slice(-5);
 	return (
 		<>
 			<Animation style='zoom-in-left' placement='center-center'>
@@ -101,7 +81,7 @@ const Article = () => {
 						more areas
 					</p>
 					<div className='w-full bg-black h-[1px] mb-[24px]'></div>
-					{articles?.map((article) => (
+					{lastFiveArticles?.map((article) => (
 						<Card
 							key={article?._id}
 							img={article?.media}
