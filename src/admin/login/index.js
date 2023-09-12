@@ -128,7 +128,7 @@ const Index = () => {
 			</div>
 			<aside className='md:w-[50%] h-[70vh] md:h-screen overflow-hidden flex justify-center items-center '>
 				<img
-					src={require('../../images/ozekhome1.jpg')}
+					src={require('../../images/ozekhome.jpg')}
 					className='h-full w-full'
 					alt='logo'
 				/>
