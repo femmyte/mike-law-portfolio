@@ -29,10 +29,10 @@ span {
 }
 
 .home-bg {
-	background-image: url('./images/client-bg.png');
+	background-image: url('./images/client-bg.jpg');
 }
 .home-bg-small {
-	background-image: url('./images/mobile/client-bg.png');
+	background-image: url('./images/mobile/client-bg.jpg');
 }
 .ozekhome-bg {
 	background-image: url('./images/ozekhome.jpg');
