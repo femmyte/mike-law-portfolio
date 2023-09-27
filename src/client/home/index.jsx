@@ -104,9 +104,9 @@ const page = () => {
 					</section>
 				</Animation>
 				<Animation style='fade-down-right'>
-					<section className='relative h-[369px] home-bg-small md:home-bg  bg-cover bg-center overflow-hidden'>
+					<section className='relative h-[369px] home-bg-small md:home-bg  bg-cover bg-top overflow-hidden'>
 						<div
-							className='absolute top-[1px] left-0 right-0 bottom-0 h-[369px] z-[1]'
+							className='absolute bg-[rgba(0,0,0,.6)] top-[1px] left-0 right-0 bottom-0 h-[369px] z-[1]'
 							// style={{
 							//   background: "rgba(0, 0, 0, 0.92)",
 							//   // "linear-gradient(84.59deg, rgba(0, 0, 0, 0.58) 17.84%, rgba(0, 0, 0, 0.17) 52.14%, rgba(0, 0, 0, 0.65) 80.9%)",  }}
